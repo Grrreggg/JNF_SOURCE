@@ -1,0 +1,429 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/scenes/BloodController.gd" type="Script" id=1]
+[ext_resource path="res://assets/player/blood/dot_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/blood/dot_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/blood/dot_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/blood/dot_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/blood/dot_4.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/blood/drop_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/blood/drop_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/blood/drop_2.png" type="Texture" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 4.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 14.2773
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 300.0
+scale = 2.0
+scale_random = 1.0
+color = Color( 0.643137, 0.0509804, 0.0784314, 1 )
+
+[sub_resource type="Animation" id=4]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("rotation/drop_0/texture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("rotation/drop_1/texture:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("rotation/drop_2/texture:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("rotation/drop_3/texture:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("rotation/drop_4/texture:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("rotation/drop_5/texture:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("rotation/drop_6/texture:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("rotation/drop_7/texture:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 10 ), Vector2( 0, 250 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("particles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("rotation/drop_0/texture:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("rotation/drop_1/texture:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("rotation/drop_2/texture:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("rotation/drop_3/texture:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("rotation/drop_4/texture:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("rotation/drop_5/texture:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("rotation/drop_6/texture:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("rotation/drop_7/texture:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("dots:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("dots:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.2, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Blood" type="Node2D"]
+position = Vector2( 160, 340 )
+script = ExtResource( 1 )
+
+[node name="dots" type="Node2D" parent="."]
+editor/display_folded = true
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="dot_0" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_1" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_2" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_3" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_4" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_5" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_6" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_7" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_8" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_9" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_10" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_11" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_12" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_13" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_14" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_15" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_16" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_17" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_18" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_19" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="dot_20" type="AnimatedSprite" parent="dots"]
+frames = SubResource( 1 )
+
+[node name="rotation" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="drop_0" type="Node2D" parent="rotation"]
+editor/display_folded = true
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_0"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_1" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 0.785398
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_1"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_2" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 1.5708
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_2"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_3" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 2.35619
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_3"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_4" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 3.14159
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_4"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_5" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 3.92699
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_5"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_6" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 4.71239
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_6"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="drop_7" type="Node2D" parent="rotation"]
+editor/display_folded = true
+rotation = 5.49779
+
+[node name="texture" type="AnimatedSprite" parent="rotation/drop_7"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 250 )
+frames = SubResource( 2 )
+
+[node name="particles" type="Particles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.7
+one_shot = true
+preprocess = 0.5
+process_material = SubResource( 3 )
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+anims/explode = SubResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]

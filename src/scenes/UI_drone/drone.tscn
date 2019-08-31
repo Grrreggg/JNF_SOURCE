@@ -1,0 +1,183 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://src/scenes/UI_drone/DroneControlle.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/switch.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/jet.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/ui/drone/body.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/drone/shine.png" type="Texture" id=5]
+[ext_resource path="res://src/scenes/UI_drone/engine.gd" type="Script" id=6]
+[ext_resource path="res://assets/player/Engine_fire.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/drone/frame.png" type="Texture" id=8]
+[ext_resource path="res://src/scenes/UI_drone/light.gd" type="Script" id=9]
+[ext_resource path="res://assets/ui/options/menu_back.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/options/menu_info.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/options/menu_next.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/options/menu_play.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/options/menu_menu.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/options/menu_no_sound.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/options/menu_sound.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/options/menu_exit.png" type="Texture" id=17]
+[ext_resource path="res://assets/ui/options/menu_ok.png" type="Texture" id=18]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.037037, 0.948148, 0.977778 )
+colors = PoolColorArray( 1, 0, 0, 1, 0.910156, 0.899324, 0.216873, 1, 0.913725, 0.984314, 0.658824, 0.164706 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 128
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 3, 3, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 2000, 0 )
+angular_velocity = 2.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+color_ramp = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+trail_divisor = 2
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 500, 0 )
+initial_velocity_random = 1.0
+angular_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.976471, 0.976471, 0.976471, 0.898039 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.580392, 1, 1, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "info",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "next",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": false,
+"name": "play",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": false,
+"name": "menu",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "sound",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": false,
+"name": "exit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": false,
+"name": "ok",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 40.0
+
+[node name="drone" type="Node2D"]
+position = Vector2( 104.429, 546.817 )
+script = ExtResource( 1 )
+click_sound = ExtResource( 2 )
+jet_sound = ExtResource( 3 )
+
+[node name="body" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( -6, 77 )
+texture = ExtResource( 4 )
+
+[node name="shine" type="Sprite" parent="body"]
+material = SubResource( 1 )
+position = Vector2( 7, 0 )
+texture = ExtResource( 5 )
+
+[node name="engine" type="Node2D" parent="body"]
+show_behind_parent = true
+script = ExtResource( 6 )
+
+[node name="fire" type="Sprite" parent="body/engine"]
+material = SubResource( 2 )
+position = Vector2( 5, 18 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 7 )
+offset = Vector2( 0, 7 )
+
+[node name="Particles" type="Particles2D" parent="body/engine"]
+position = Vector2( 5, 20 )
+amount = 18
+lifetime = 0.2
+local_coords = false
+process_material = SubResource( 5 )
+
+[node name="smoke" type="Particles2D" parent="body"]
+position = Vector2( -11.5, -16 )
+local_coords = false
+process_material = SubResource( 6 )
+
+[node name="light" type="Particles2D" parent="body"]
+position = Vector2( 8, -1 )
+rotation = -1.5708
+amount = 20
+lifetime = 0.4
+process_material = SubResource( 7 )
+
+[node name="frame" type="Sprite" parent="."]
+material = SubResource( 8 )
+position = Vector2( 1, 5 )
+texture = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="icon" type="AnimatedSprite" parent="frame"]
+show_behind_parent = true
+position = Vector2( 1, 0 )
+frames = SubResource( 9 )
+animation = "info"
+
+[node name="ui" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ui"]
+position = Vector2( 1, 5 )
+shape = SubResource( 10 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

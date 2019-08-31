@@ -1,0 +1,395 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://src/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/song_0.ogg" type="AudioStream" id=2]
+[ext_resource path="res://src/scenes/SkyController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/scenes/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/jet.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/smash.ogg" type="AudioStream" id=6]
+[ext_resource path="res://src/scenes/LevelController.gd" type="Script" id=7]
+[ext_resource path="res://src/scenes/ModuleControler.gd" type="Script" id=8]
+[ext_resource path="res://src/scenes/walls/wall_generic.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/scenes/walls/wall_right.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/scenes/player/Blood.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/scenes/menu_controller.gd" type="Script" id=12]
+[ext_resource path="res://src/scenes/UI_drone/drone.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/scenes/Logo.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/scenes/UI/best_result_controller.gd" type="Script" id=15]
+[ext_resource path="res://assets/ui/NewBest.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/YourBest.png" type="Texture" id=17]
+[ext_resource path="res://src/scenes/UI/Numbers.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/scenes/UI/camera_mover.gd" type="Script" id=19]
+[ext_resource path="res://src/scenes/UI/info_controller.gd" type="Script" id=20]
+[ext_resource path="res://assets/ui/info/autor.png" type="Texture" id=21]
+[ext_resource path="res://assets/ui/info/music.png" type="Texture" id=22]
+[ext_resource path="res://assets/ui/info/more.png" type="Texture" id=23]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.2
+glow_strength = 0.82
+glow_blend_mode = 0
+glow_hdr_luminance_cap = 5.0
+glow_hdr_scale = 0.0
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "new",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "your",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "hide"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 4.5
+
+[sub_resource type="Animation" id=6]
+
+[sub_resource type="Animation" id=7]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Main/UI/LogoGroup:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.112656, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-005, 1e-005 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Main/UI/LogoGroup:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 0.116629 ),
+"update": 0,
+"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "hide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.8, 0.8 ), Vector2( 1.1, 1.1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+player_node = NodePath("Main/Player")
+blood_node = NodePath("Main/Blood")
+sky_node = NodePath("SkyController")
+ui_node = NodePath("Main/UI")
+animator_node = NodePath("MainAnimator")
+camera_mover_node = NodePath("CameraMover")
+main_music = ExtResource( 2 )
+
+[node name="SkyController" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 0.377319 )
+
+[node name="Main" type="Node2D" parent="."]
+
+[node name="Player" parent="Main" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 190, 550 )
+main_node = NodePath("../..")
+jet_sound = ExtResource( 5 )
+smash_sound = ExtResource( 6 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Main"]
+environment = SubResource( 1 )
+
+[node name="Level" type="Node2D" parent="Main"]
+editor/display_folded = true
+position = Vector2( -1, 0 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+main_node = NodePath("../..")
+
+[node name="Module_0" type="Node2D" parent="Main/Level"]
+editor/display_folded = true
+position = Vector2( 0, -223 )
+script = ExtResource( 8 )
+
+[node name="wall_l" parent="Main/Level/Module_0" instance=ExtResource( 9 )]
+position = Vector2( 30, 0 )
+
+[node name="wall_r" parent="Main/Level/Module_0" instance=ExtResource( 10 )]
+position = Vector2( 352, 0 )
+
+[node name="Module_1" type="Node2D" parent="Main/Level"]
+editor/display_folded = true
+position = Vector2( 0, -71 )
+script = ExtResource( 8 )
+
+[node name="wall_l" parent="Main/Level/Module_1" instance=ExtResource( 9 )]
+position = Vector2( 30, 0 )
+
+[node name="wall_r" parent="Main/Level/Module_1" instance=ExtResource( 10 )]
+position = Vector2( 352, 0 )
+
+[node name="Module_2" type="Node2D" parent="Main/Level"]
+editor/display_folded = true
+position = Vector2( 0, 81 )
+script = ExtResource( 8 )
+
+[node name="wall_l" parent="Main/Level/Module_2" instance=ExtResource( 9 )]
+position = Vector2( 30, 0 )
+
+[node name="wall_r" parent="Main/Level/Module_2" instance=ExtResource( 10 )]
+position = Vector2( 352, 0 )
+
+[node name="Module_3" type="Node2D" parent="Main/Level"]
+editor/display_folded = true
+position = Vector2( 0, 233 )
+script = ExtResource( 8 )
+
+[node name="wall_l" parent="Main/Level/Module_3" instance=ExtResource( 9 )]
+position = Vector2( 30, 0 )
+
+[node name="wall_r" parent="Main/Level/Module_3" instance=ExtResource( 10 )]
+position = Vector2( 352, 0 )
+
+[node name="Module_4" type="Node2D" parent="Main/Level"]
+editor/display_folded = true
+position = Vector2( 0, 387 )
+script = ExtResource( 8 )
+
+[node name="wall_l" parent="Main/Level/Module_4" instance=ExtResource( 9 )]
+position = Vector2( 30, 0 )
+
+[node name="wall_r" parent="Main/Level/Module_4" instance=ExtResource( 10 )]
+position = Vector2( 352, 0 )
+
+[node name="Module_5" type="Node2D" parent="Main/Level"]
+editor/display_folded = true
+position = Vector2( 0, 541 )
+script = ExtResource( 8 )
+
+[node name="wall_l" parent="Main/Level/Module_5" instance=ExtResource( 9 )]
+position = Vector2( 30, 0 )
+
+[node name="wall_r" parent="Main/Level/Module_5" instance=ExtResource( 10 )]
+position = Vector2( 352, 0 )
+
+[node name="Blood" parent="Main" instance=ExtResource( 11 )]
+position = Vector2( 0, 0 )
+main_node = NodePath("../..")
+
+[node name="UI" type="Node2D" parent="Main"]
+script = ExtResource( 12 )
+main_node = NodePath("../..")
+best_node = NodePath("best")
+info_node = NodePath("../../info")
+
+[node name="drone_l" parent="Main/UI" instance=ExtResource( 13 )]
+position = Vector2( 102.429, 546.817 )
+is_left = true
+
+[node name="drone_r" parent="Main/UI" instance=ExtResource( 13 )]
+position = Vector2( 274.429, 546.817 )
+
+[node name="LogoGroup" parent="Main/UI" instance=ExtResource( 14 )]
+position = Vector2( 190, 230 )
+scale = Vector2( 1e-005, 1e-005 )
+
+[node name="best" type="Node2D" parent="Main/UI"]
+visible = false
+position = Vector2( 190, 431 )
+scale = Vector2( 1e-005, 1e-005 )
+script = ExtResource( 15 )
+
+[node name="Best" type="AnimatedSprite" parent="Main/UI/best"]
+frames = SubResource( 2 )
+animation = "your"
+
+[node name="Numfield" parent="Main/UI/best" instance=ExtResource( 18 )]
+margin_left = -185.0
+margin_top = 32.0
+margin_right = 155.0
+margin_bottom = 72.0
+
+[node name="Animator" type="AnimationPlayer" parent="Main/UI/best"]
+anims/hide = SubResource( 3 )
+anims/show = SubResource( 4 )
+
+[node name="MainAnimator" type="AnimationPlayer" parent="."]
+anims/death = SubResource( 5 )
+anims/game_started = SubResource( 6 )
+anims/hide_logo = SubResource( 7 )
+anims/intro = SubResource( 8 )
+
+[node name="CameraMover" type="Node" parent="."]
+script = ExtResource( 19 )
+
+[node name="Tween" type="Tween" parent="CameraMover"]
+
+[node name="BtnLeft" type="TextureButton" parent="."]
+margin_left = -43.0
+margin_top = -10.0
+margin_right = 190.0
+margin_bottom = 700.0
+
+[node name="BtnRight" type="TextureButton" parent="."]
+margin_left = 191.0
+margin_top = -10.0
+margin_right = 424.0
+margin_bottom = 700.0
+
+[node name="info" type="Node2D" parent="."]
+visible = false
+position = Vector2( 190, 230 )
+scale = Vector2( 1e-005, 1e-005 )
+script = ExtResource( 20 )
+
+[node name="autor" type="Sprite" parent="info"]
+position = Vector2( -0.909081, -57.2727 )
+texture = ExtResource( 21 )
+
+[node name="music" type="TextureButton" parent="info"]
+margin_left = -60.9091
+margin_top = 12.7273
+margin_right = 57.0909
+margin_bottom = 73.7273
+texture_normal = ExtResource( 22 )
+
+[node name="more" type="TextureButton" parent="info"]
+margin_left = -30.9091
+margin_top = 122.727
+margin_right = 33.0909
+margin_bottom = 162.727
+texture_normal = ExtResource( 23 )
+
+[node name="Animator" type="AnimationPlayer" parent="info"]
+anims/hide = SubResource( 9 )
+anims/show = SubResource( 10 )
+[connection signal="animation_finished" from="MainAnimator" to="." method="_on_MainAnimator_animation_finished"]
+[connection signal="tween_all_completed" from="CameraMover/Tween" to="CameraMover" method="_on_Tween_tween_all_completed"]
+[connection signal="pressed" from="BtnLeft" to="." method="virtual_button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="BtnRight" to="." method="virtual_button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="info/music" to="info" method="_on_music_pressed"]
+[connection signal="pressed" from="info/more" to="info" method="_on_more_pressed"]

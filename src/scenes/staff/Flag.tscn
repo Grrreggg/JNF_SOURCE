@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/scenes/staff/Flag.gd" type="Script" id=1]
+[ext_resource path="res://assets/world/flag/stand.png" type="Texture" id=2]
+[ext_resource path="res://assets/world/flag/blood/blood_stand.png" type="Texture" id=3]
+[ext_resource path="res://assets/world/flag/flag.png" type="Texture" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 20, 2, 1 )
+flag_disable_z = true
+gravity = Vector3( -98, 98, 0 )
+angular_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.643137, 0.0509804, 0.0784314, 1 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+void vertex() {
+	VERTEX.y += cos(TIME + VERTEX.y) * 2.0;
+	VERTEX.x += cos(TIME + VERTEX.x + VERTEX.y) * 2.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[node name="Flag" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Base" type="Sprite" parent="."]
+position = Vector2( 28.5, -14 )
+texture = ExtResource( 2 )
+
+[node name="Blood" type="Sprite" parent="Base"]
+visible = false
+position = Vector2( 2, -6 )
+texture = ExtResource( 3 )
+
+[node name="Particles" type="Particles2D" parent="Base/Blood"]
+position = Vector2( 10, -13 )
+rotation = -0.785398
+emitting = false
+amount = 10
+process_material = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 3 )
+margin_left = 55.5872
+margin_top = -50.3576
+margin_right = 94.5872
+margin_bottom = -28.3576
+rect_rotation = 45.0
+texture = ExtResource( 4 )
+
+[node name="Flag" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flag"]
+polygon = PoolVector2Array( 55.2998, -50.3589, 77.9411, -24.3214, 65.111, -9.2272, 42.0923, -32.6232, 5.11156, 8.50849, 3.97949, -7.34042 )
+[connection signal="area_entered" from="Flag" to="." method="_on_Flag_area_entered"]

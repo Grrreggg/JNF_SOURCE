@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/scenes/SkyController.gd" type="Script" id=1]
+[ext_resource path="res://assets/world/background/sun.png" type="Texture" id=2]
+[ext_resource path="res://assets/world/background/layer_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/world/background/layer_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/world/background/stars.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.380645, 0.490323, 0.63871, 0.754839, 0.793548, 0.851613 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.25, 0.25, 0.25, 1, 0.482968, 0.77862, 0.846847, 1, 1, 0.973145, 0.570313, 1, 0.988281, 0.872919, 0.119675, 1, 0.472656, 0.132992, 0.0978546, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 100
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[node name="SkyController" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sky" type="Sprite" parent="."]
+modulate = Color( 1, 0.996078, 0.690196, 1 )
+position = Vector2( 200, -500 )
+rotation = 1.5708
+scale = Vector2( 31.3347, 580.075 )
+texture = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="sun" type="Sprite" parent="."]
+modulate = Color( 1, 0.411765, 0.207843, 1 )
+material = SubResource( 3 )
+position = Vector2( 189.806, 610.009 )
+texture = ExtResource( 2 )
+
+[node name="layer_0" type="Sprite" parent="."]
+modulate = Color( 0.490196, 0.172549, 0.0745098, 1 )
+position = Vector2( 187.752, 617.256 )
+texture = ExtResource( 3 )
+
+[node name="layer_1" type="Sprite" parent="."]
+modulate = Color( 0.596078, 0.223529, 0.14902, 1 )
+position = Vector2( 188, 642 )
+texture = ExtResource( 4 )
+
+[node name="stars" type="Sprite" parent="."]
+position = Vector2( 191, -1000 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )

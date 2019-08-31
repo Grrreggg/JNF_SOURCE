@@ -1,0 +1,285 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://src/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/player/Body.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/Hair_01.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/Hair_02.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/Hair_03.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/Leg_L.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/Leg_R.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/Arm_L.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/Arm_R.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/Engine_L.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/Engine_fire.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/Engine_R.png" type="Texture" id=12]
+[ext_resource path="res://src/scenes/player/AngularController.gd" type="Script" id=13]
+[ext_resource path="res://src/scenes/player/FireController.gd" type="Script" id=14]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 3.00737
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1.79475, 9.97279 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.037037, 0.948148, 0.977778 )
+colors = PoolColorArray( 1, 0, 0, 1, 0.910156, 0.899324, 0.216873, 1, 0.913725, 0.984314, 0.658824, 0.164706 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+width = 128
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 2
+emission_box_extents = Vector3( 3, 3, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 2000, 0 )
+angular_velocity = 2.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+color_ramp = SubResource( 5 )
+
+[sub_resource type="CanvasItemMaterial" id=7]
+blend_mode = 1
+
+[sub_resource type="ParticlesMaterial" id=8]
+trail_divisor = 2
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 500, 0 )
+initial_velocity_random = 1.0
+angular_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.976471, 0.976471, 0.976471, 0.898039 )
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 10.4505
+height = 69.5108
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 25.1101, 12.6609 )
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Body" type="Sprite" parent="."]
+editor/display_folded = true
+texture = ExtResource( 2 )
+
+[node name="BodyRigidBody" type="RigidBody2D" parent="Body"]
+editor/display_folded = true
+mode = 3
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/BodyRigidBody"]
+shape = SubResource( 1 )
+
+[node name="LegJointL" type="PinJoint2D" parent="Body"]
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Leg_L")
+bias = 0.5
+softness = 1.0
+
+[node name="LegJointR" type="PinJoint2D" parent="Body"]
+position = Vector2( 0, -10 )
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Leg_R")
+bias = 0.5
+softness = 1.0
+
+[node name="HairJoint" type="PinJoint2D" parent="Body"]
+position = Vector2( 0, -11 )
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Hair")
+
+[node name="HairJointSpring" type="DampedSpringJoint2D" parent="Body"]
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Hair")
+bias = 0.5
+length = 1.0
+
+[node name="ArmJointSpringL" type="DampedSpringJoint2D" parent="Body"]
+position = Vector2( -11.506, 15.539 )
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Arm_L")
+bias = 0.6
+length = 1.0
+
+[node name="ArmJointSpringR" type="DampedSpringJoint2D" parent="Body"]
+position = Vector2( 12.43, 15.58 )
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Arm_R")
+bias = 0.6
+length = 1.0
+
+[node name="ArmJointL" type="PinJoint2D" parent="Body"]
+position = Vector2( -11.5057, 2.53921 )
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Arm_L")
+
+[node name="ArmJointR" type="PinJoint2D" parent="Body"]
+position = Vector2( 12.4298, 2.58036 )
+node_a = NodePath("../BodyRigidBody")
+node_b = NodePath("../../Arm_R")
+
+[node name="Hair" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 0, -11 )
+can_sleep = false
+
+[node name="Texture" type="AnimatedSprite" parent="Hair"]
+modulate = Color( 0.972549, 0.67451, 0.67451, 1 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+centered = false
+offset = Vector2( -6.5, -7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hair"]
+position = Vector2( 0, 11 )
+shape = SubResource( 1 )
+
+[node name="Leg_L" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( -6.513, 20.578 )
+
+[node name="Texture" type="Sprite" parent="Leg_L"]
+position = Vector2( 0.000209808, -0.000198364 )
+texture = ExtResource( 6 )
+centered = false
+offset = Vector2( -6, 0 )
+
+[node name="Leg_R" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 6.012, 20.562 )
+
+[node name="Texture" type="Sprite" parent="Leg_R"]
+texture = ExtResource( 7 )
+centered = false
+offset = Vector2( -6.5, 0 )
+
+[node name="Arm_L" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( -11.487, 2.512 )
+
+[node name="Texture" type="Sprite" parent="Arm_L"]
+texture = ExtResource( 8 )
+centered = false
+offset = Vector2( -5, 0 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Arm_L"]
+position = Vector2( 0, 13 )
+shape = SubResource( 3 )
+
+[node name="Arm_R" type="RigidBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 12.462, 2.512 )
+
+[node name="Texture" type="Sprite" parent="Arm_R"]
+texture = ExtResource( 9 )
+centered = false
+offset = Vector2( -5, 0 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Arm_R"]
+position = Vector2( 0, 13 )
+shape = SubResource( 3 )
+
+[node name="Engine_L" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( -20.5151, -1.50333 )
+texture = ExtResource( 10 )
+centered = false
+offset = Vector2( -5, -10 )
+
+[node name="FireGroup" type="Node2D" parent="Engine_L"]
+show_behind_parent = true
+position = Vector2( 0, 10 )
+
+[node name="Particles" type="Particles2D" parent="Engine_L/FireGroup"]
+position = Vector2( 0, 2 )
+amount = 50
+lifetime = 0.2
+preprocess = 10.0
+randomness = 1.0
+process_material = SubResource( 6 )
+
+[node name="Fire" type="Sprite" parent="Engine_L/FireGroup"]
+material = SubResource( 7 )
+position = Vector2( 0, -2 )
+texture = ExtResource( 11 )
+offset = Vector2( 0, 8 )
+
+[node name="Engine_R" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 20.4849, -1.50333 )
+texture = ExtResource( 12 )
+centered = false
+offset = Vector2( -5, -10 )
+
+[node name="FireGroup" type="Node2D" parent="Engine_R"]
+show_behind_parent = true
+position = Vector2( 0, 10 )
+
+[node name="Particles" type="Particles2D" parent="Engine_R/FireGroup"]
+position = Vector2( 0, 2 )
+amount = 50
+lifetime = 0.2
+preprocess = 10.0
+randomness = 1.0
+process_material = SubResource( 6 )
+
+[node name="Fire" type="Sprite" parent="Engine_R/FireGroup"]
+material = SubResource( 7 )
+position = Vector2( 0, -2 )
+scale = Vector2( 1.01428, 1 )
+texture = ExtResource( 11 )
+offset = Vector2( 0, 8 )
+
+[node name="PipeParticles1" type="Particles2D" parent="."]
+position = Vector2( -10.4595, -24 )
+amount = 70
+preprocess = 10.0
+local_coords = false
+process_material = SubResource( 8 )
+
+[node name="PipeParticles2" type="Particles2D" parent="."]
+position = Vector2( 10.5405, -24 )
+amount = 70
+preprocess = 10.0
+local_coords = false
+process_material = SubResource( 8 )
+
+[node name="PositionTween" type="Tween" parent="."]
+
+[node name="EngineTween" type="Tween" parent="."]
+
+[node name="AngularController" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="FireController" type="Node" parent="."]
+script = ExtResource( 14 )
+
+[node name="DeathArea" type="Area2D" parent="."]
+collision_layer = 1025
+collision_mask = 1025
+
+[node name="CollisionShape0" type="CollisionShape2D" parent="DeathArea"]
+position = Vector2( 0, 28 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape1" type="CollisionShape2D" parent="DeathArea"]
+position = Vector2( 0, 1 )
+shape = SubResource( 10 )
+[connection signal="tween_all_completed" from="PositionTween" to="." method="_on_PositionTween_tween_all_completed"]
+[connection signal="tween_all_completed" from="EngineTween" to="." method="_on_EngineTween_tween_all_completed"]
+[connection signal="area_entered" from="DeathArea" to="." method="_on_DeathArea_area_entered"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/scenes/staff/BillboardController.gd" type="Script" id=1]
+[ext_resource path="res://assets/world/billdoard/screen.png" type="Texture" id=2]
+[ext_resource path="res://assets/world/billdoard/posters/1.png" type="Texture" id=3]
+[ext_resource path="res://assets/world/billdoard/posters/2.png" type="Texture" id=4]
+[ext_resource path="res://assets/world/billdoard/posters/3.png" type="Texture" id=5]
+[ext_resource path="res://assets/world/billdoard/posters/4.png" type="Texture" id=6]
+[ext_resource path="res://assets/world/billdoard/top.png" type="Texture" id=7]
+[ext_resource path="res://assets/world/billdoard/blood/blood_top.png" type="Texture" id=8]
+[ext_resource path="res://assets/world/billdoard/bot.png" type="Texture" id=9]
+[ext_resource path="res://assets/world/billdoard/blood/blood_boot.png" type="Texture" id=10]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 2
+emission_box_extents = Vector3( 15, 2, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+angular_velocity = 14.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.643137, 0.0509804, 0.0784314, 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 31.7089, 50.6992 )
+
+[node name="Billboard" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Screen" type="Sprite" parent="."]
+editor/display_folded = true
+modulate = Color( 0.219608, 0.976471, 0.886275, 0.901961 )
+material = SubResource( 1 )
+position = Vector2( 35.5, 0 )
+texture = ExtResource( 2 )
+
+[node name="image_0" type="Sprite" parent="Screen"]
+show_behind_parent = true
+position = Vector2( -1, 2 )
+texture = ExtResource( 3 )
+
+[node name="image_1" type="Sprite" parent="Screen"]
+visible = false
+show_behind_parent = true
+position = Vector2( 1, 2 )
+texture = ExtResource( 4 )
+
+[node name="image_2" type="Sprite" parent="Screen"]
+visible = false
+show_behind_parent = true
+position = Vector2( 0, -1 )
+texture = ExtResource( 5 )
+
+[node name="image_3" type="Sprite" parent="Screen"]
+visible = false
+show_behind_parent = true
+position = Vector2( 0, 1 )
+texture = ExtResource( 6 )
+
+[node name="Base" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 34, 0 )
+
+[node name="Base_top" type="Sprite" parent="Base"]
+position = Vector2( 0, -47.5 )
+texture = ExtResource( 7 )
+
+[node name="blood" type="Sprite" parent="Base/Base_top"]
+visible = false
+position = Vector2( 11, 0 )
+texture = ExtResource( 8 )
+
+[node name="Particles2D" type="Particles2D" parent="Base/Base_top/blood"]
+position = Vector2( 5, 0.5 )
+emitting = false
+process_material = SubResource( 2 )
+
+[node name="Base_bot" type="Sprite" parent="Base"]
+position = Vector2( 0, 47.5 )
+texture = ExtResource( 9 )
+
+[node name="blood" type="Sprite" parent="Base/Base_bot"]
+visible = false
+position = Vector2( 13, -0.5 )
+texture = ExtResource( 10 )
+
+[node name="Particles2D" type="Particles2D" parent="Base/Base_bot/blood"]
+position = Vector2( 3, 0.5 )
+emitting = false
+process_material = SubResource( 2 )
+
+[node name="Billboard" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billboard"]
+position = Vector2( 35.1164, -0.355618 )
+shape = SubResource( 3 )
+[connection signal="area_entered" from="Billboard" to="." method="_on_Billboard_area_entered"]

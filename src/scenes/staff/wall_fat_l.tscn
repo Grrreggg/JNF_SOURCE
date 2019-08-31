@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/scenes/staff/wall_fat_controller.gd" type="Script" id=1]
+[ext_resource path="res://assets/world/walls/wall_w_l.png" type="Texture" id=2]
+[ext_resource path="res://assets/world/walls/blood/blood_both.png" type="Texture" id=3]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 15, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.643137, 0.0509804, 0.0784314, 1 )
+
+[node name="wall_fat_l" type="Node2D"]
+script = ExtResource( 1 )
+death_area_path = NodePath("Fat/CollisionPolygon2D")
+
+[node name="texture" type="Sprite" parent="."]
+position = Vector2( 38, 57 )
+texture = ExtResource( 2 )
+
+[node name="blood" type="Sprite" parent="."]
+visible = false
+position = Vector2( 66.5, 57.5 )
+texture = ExtResource( 3 )
+
+[node name="Particles0" type="Particles2D" parent="blood"]
+position = Vector2( -6, -55 )
+emitting = false
+process_material = SubResource( 1 )
+
+[node name="Particles1" type="Particles2D" parent="blood"]
+position = Vector2( -7, 59 )
+emitting = false
+process_material = SubResource( 1 )
+
+[node name="Fat" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Fat"]
+polygon = PoolVector2Array( 25.3292, -10.7249, 34.909, -1.74388, 74.4258, -0.546402, 92.9866, 19.2119, 94.1841, 95.2517, 74.4258, 114.411, 35.5078, 115.01, 25.928, 125.189 )
